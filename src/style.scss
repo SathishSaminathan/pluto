@@ -1,6 +1,6 @@
 @import "./constants/_ThemeConstants.scss";
 
-$border_radius: 10px;
+$border_radius: 20px;
 .getStartedContainer {
   background-color: $primaryThemeColor;
   height: 100vh;
@@ -8,6 +8,8 @@ $border_radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  // background-image: url('./assets/images/getStarted.png');
+  background-size: contain;
   .getStarted {
     .list {
       li {
@@ -17,6 +19,13 @@ $border_radius: 10px;
       }
     }
   }
+}
+
+.submitBtn {
+  outline: none;
+  border: none;
+  width: 100%;
+  padding: 10px 5px;
 }
 
 .home {
@@ -29,10 +38,14 @@ $border_radius: 10px;
 .homeContainer {
   display: flex;
   flex-direction: row;
-  height: 80vh;
+  flex-wrap: nowrap;
+  height: 90vh;
   width: 100%;
   border-radius: $border_radius;
+  overflow: hidden;
   background-color: $primaryThemeColor;
+  box-shadow: 0 0 25px 0px #00000094;
+
   .left {
     background-color: $primaryThemeColor;
     width: 60%;
@@ -43,6 +56,17 @@ $border_radius: 10px;
     justify-content: center;
     .cont {
       width: 90%;
+      .textAreaContainer {
+        background-color: white;
+        border-radius: $border_radius;
+        padding: 10px;
+        box-shadow: 0 0 25px 0px #00000094;
+      }
+      .logoName {
+        font-size: 2rem;
+        font-weight: bold;
+        color: white;
+      }
       .title {
         color: white;
         font-size: 30px;
@@ -50,10 +74,12 @@ $border_radius: 10px;
       }
       .textArea {
         text-align: left;
-        width: 90%;
+        width: -webkit-fill-available;
         background: transparent;
-        color: white;
-        border-radius: 10px;
+        color: black;
+        border-radius: 5px;
+        border: none !important;
+        box-shadow: none;
         padding: 0.5%;
         outline: none;
       }
@@ -63,7 +89,17 @@ $border_radius: 10px;
     margin: 0.5%;
     background-color: white;
     width: 40%;
-    border-radius: 10px;
+    border-radius: $border_radius;
+    .answerTitle {
+      font-size: 2rem;
+      font-weight: bold;
+      color: black;
+      text-align: left;
+      display: block;
+    }
+    .answer {
+      text-align: justify;
+    }
   }
 }
 
@@ -114,14 +150,12 @@ $border_radius: 10px;
   transition: all 0.3s ease-in-out 0s;
 }
 
-.button:hover,
-.button:focus {
+.button:hover {
   color: #313133;
   transform: translateY(-6px);
 }
 
-button:hover::before,
-button:focus::before {
+button:hover::before {
   opacity: 1;
 }
 
@@ -139,21 +173,20 @@ button::after {
   animation: ring 1.5s infinite;
 }
 
-button:hover::after,
-button:focus::after {
+button:hover::after {
   animation: none;
   display: none;
 }
 
-@keyframes ring {
-  0% {
-    width: 30px;
-    height: 30px;
-    opacity: 1;
-  }
-  100% {
-    width: 300px;
-    height: 300px;
-    opacity: 0;
-  }
-}
+// @keyframes ring {
+//   0% {
+//     width: 30px;
+//     height: 30px;
+//     opacity: 1;
+//   }
+//   100% {
+//     width: 300px;
+//     height: 300px;
+//     opacity: 0;
+//   }
+// }
