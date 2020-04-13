@@ -1,11 +1,15 @@
 import React, { Component } from "react";
-import { Row, Col, Button } from "antd";
+import { Row, Col } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import LottieComponent from "components/shared/LottieComponent";
 import LottieFile from "assets/lottie";
+import { Images } from "assets/images";
 
 export default class Home extends Component {
-  state = { isStopped: true, isPaused: false };
+  constructor(props) {
+    super(props);
+    this.state = { isStopped: true, isPaused: false, answer: null };
+  }
 
   stopAnimation = () => {
     this.setState({
@@ -16,6 +20,19 @@ export default class Home extends Component {
   startAnimation = () => {
     this.setState({ isStopped: false, isPaused: false });
     setTimeout(() => {
+      this.setState({
+        answer: `Lorem Ipsum is simply dummy text of the printing and
+        typesetting industry. Lorem Ipsum has been the industry's
+        standard dummy text ever since the 1500s, when an unknown
+        printer took a galley of type and scrambled it to make a
+        type specimen book. It has survived not only five
+        centuries, but also the leap into electronic typesetting,
+        remaining essentially unchanged. It was popularised in the
+        1960s with the release of Letraset sheets containing Lorem
+        Ipsum passages, and more recently with desktop publishing
+        software like Aldus PageMaker including versions of Lorem
+        Ipsum.`,
+      });
       this.stopAnimation();
     }, 5000);
   };
@@ -23,13 +40,14 @@ export default class Home extends Component {
     this.stopAnimation();
   }
   render() {
+    const { answer } = this.state;
     return (
       <Row className="home">
         <Col style={{ width: "98%" }}>
           <Row className="homeContainer">
             <Col className="left">
               <Col className="cont">
-                <span className="logoName">Pluto</span>
+                <img src={Images.logo} style={{ width: "40%" }} />
               </Col>
               <Col className="cont">
                 <Col className="title">Training data</Col>
@@ -40,7 +58,7 @@ export default class Home extends Component {
                   <TextArea
                     className="textArea"
                     placeholder="feed your data"
-                    autoSize={{ minRows: 13, maxRows: 13 }}
+                    autoSize={{ minRows: 10, maxRows: 10 }}
                   />
                 </Col>
               </Col>
@@ -94,19 +112,7 @@ export default class Home extends Component {
                     <span className="answerTitle">Answer</span>
                   </Col>
                   <Col xl={24}>
-                    <p className="answer">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book. It has survived not only five
-                      centuries, but also the leap into electronic typesetting,
-                      remaining essentially unchanged. It was popularised in the
-                      1960s with the release of Letraset sheets containing Lorem
-                      Ipsum passages, and more recently with desktop publishing
-                      software like Aldus PageMaker including versions of Lorem
-                      Ipsum.
-                    </p>
+                    {answer && <p className="answer">{answer}</p>}
                   </Col>
                 </Col>
               </Row>
