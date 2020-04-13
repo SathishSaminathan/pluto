@@ -35,12 +35,12 @@ export default class Home extends Component {
       }
     )
       .then((res) => {
-        debugger;
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
+
     setTimeout(() => {
       this.setState({
         answer: `Lorem Ipsum is simply dummy text of the printing and
