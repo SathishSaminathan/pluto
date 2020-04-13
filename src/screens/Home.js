@@ -4,11 +4,18 @@ import TextArea from "antd/lib/input/TextArea";
 import LottieComponent from "components/shared/LottieComponent";
 import LottieFile from "assets/lottie";
 import { Images } from "assets/images";
+import Axios from "axios";
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { isStopped: true, isPaused: false, answer: null };
+    this.state = {
+      isStopped: true,
+      isPaused: false,
+      answer: null,
+      paragraph: null,
+      question: null,
+    };
   }
 
   stopAnimation = () => {
@@ -19,6 +26,21 @@ export default class Home extends Component {
 
   startAnimation = () => {
     this.setState({ isStopped: false, isPaused: false });
+    Axios.post(
+      `http://3.132.110.164:5000/predict?context=${this.state.paragraph}&question=${this.state.question}`,
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    )
+      .then((res) => {
+        debugger;
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     setTimeout(() => {
       this.setState({
         answer: `Lorem Ipsum is simply dummy text of the printing and
@@ -59,6 +81,11 @@ export default class Home extends Component {
                     className="textArea"
                     placeholder="feed your data"
                     autoSize={{ minRows: 10, maxRows: 10 }}
+                    onChange={(e) =>
+                      this.setState({
+                        paragraph: e.target.value,
+                      })
+                    }
                   />
                 </Col>
               </Col>
@@ -72,6 +99,11 @@ export default class Home extends Component {
                     className="textArea"
                     placeholder="ask your questions"
                     autoSize={{ minRows: 5, maxRows: 5 }}
+                    onChange={(e) =>
+                      this.setState({
+                        question: e.target.value,
+                      })
+                    }
                   />
                 </Col>
               </Col>
