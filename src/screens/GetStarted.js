@@ -37,7 +37,7 @@ const GetStarted = (props) => {
                 </Col>
                 <Col>
                   <Col xl={24} style={{ paddingTop: 10 }}>
-                    <p style={{ fontSize: 20, fontStyle: "italic" }}>
+                    <p style={{ fontSize: 15, fontStyle: "italic" }}>
                       Like an astronaut traveling through space, our info-naut
                       "PLUTO" travels and explores your content, learns about
                       them using the state of the art "Scalable Artificial

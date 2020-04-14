@@ -13,8 +13,8 @@ export default class Home extends Component {
       isStopped: true,
       isPaused: false,
       answer: null,
-      paragraph: "john is the owner of the house",
-      question: "who is john",
+      paragraph: null,
+      question: null,
     };
   }
 
@@ -68,7 +68,7 @@ export default class Home extends Component {
                     defaultValue={paragraph}
                     className="textArea"
                     placeholder="Type in the content you want to get answered"
-                    autoSize={{ minRows: 10, maxRows: 10 }}
+                    autoSize={{ minRows: 8, maxRows: 8 }}
                     onChange={(e) =>
                       this.setState({
                         paragraph: e.target.value,
@@ -77,8 +77,8 @@ export default class Home extends Component {
                   />
                 </Col>
               </Col>
-              <Col className="cont">
-                <Col className="title">Questions?</Col>
+              <Col className="cont" style={{ paddingTop: 10 }}>
+                <Col className="title">Questions</Col>
                 <Col
                   style={{ textAlign: "left" }}
                   className="textAreaContainer"
@@ -87,7 +87,7 @@ export default class Home extends Component {
                     defaultValue={question}
                     className="textArea"
                     placeholder="Ask question related to the content"
-                    autoSize={{ minRows: 5, maxRows: 5 }}
+                    autoSize={{ minRows: 3, maxRows: 3 }}
                     onChange={(e) =>
                       this.setState({
                         question: e.target.value,
@@ -96,7 +96,7 @@ export default class Home extends Component {
                   />
                 </Col>
               </Col>
-              <Col style={{ width: "90%", paddingTop: 20 }}>
+              <Col style={{ width: "90%", paddingTop: 10 }}>
                 {/* <button className="submitBtn">Analysis</button> */}
                 {paragraph && question && (
                   <button
