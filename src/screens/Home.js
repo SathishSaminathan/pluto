@@ -13,8 +13,8 @@ export default class Home extends Component {
       isStopped: true,
       isPaused: false,
       answer: null,
-      paragraph: null,
-      question: null,
+      paragraph: "john is the owner of the house",
+      question: "who is john",
     };
   }
 
@@ -25,61 +25,48 @@ export default class Home extends Component {
   };
 
   startAnimation = () => {
-    this.setState({ isStopped: false, isPaused: false });
-    Axios.post(
-      `http://3.132.110.164:5000/predict?context=${this.state.paragraph}&question=${this.state.question}`,
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
+    this.setState({ isStopped: false, isPaused: false, answer: null });
+    Axios.get(
+      `http://122.165.203.72:9094/search-engine/api/v1/search/predict?context=${this.state.paragraph}&question=${this.state.question}`
     )
       .then((res) => {
         console.log(res);
+        this.setState({
+          answer: res.data.answer,
+        });
+        this.stopAnimation();
       })
       .catch((err) => {
         console.log(err);
       });
-
-    setTimeout(() => {
-      this.setState({
-        answer: `Lorem Ipsum is simply dummy text of the printing and
-        typesetting industry. Lorem Ipsum has been the industry's
-        standard dummy text ever since the 1500s, when an unknown
-        printer took a galley of type and scrambled it to make a
-        type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the
-        1960s with the release of Letraset sheets containing Lorem
-        Ipsum passages, and more recently with desktop publishing
-        software like Aldus PageMaker including versions of Lorem
-        Ipsum.`,
-      });
-      this.stopAnimation();
-    }, 5000);
   };
   componentDidMount() {
     this.stopAnimation();
   }
   render() {
-    const { answer } = this.state;
+    const { answer, question, paragraph } = this.state;
     return (
       <Row className="home">
         <Col style={{ width: "98%" }}>
           <Row className="homeContainer">
             <Col className="left">
+              {/* <Col className="cont"> */}
+              <img
+                src={Images.logo}
+                style={{ width: "40%" }}
+                className="logoImage"
+              />
+              {/* </Col> */}
               <Col className="cont">
-                <img src={Images.logo} style={{ width: "40%" }} />
-              </Col>
-              <Col className="cont">
-                <Col className="title">Training data</Col>
+                <Col className="title">Content</Col>
                 <Col
                   style={{ textAlign: "left" }}
                   className="textAreaContainer"
                 >
                   <TextArea
+                    defaultValue={paragraph}
                     className="textArea"
-                    placeholder="feed your data"
+                    placeholder="Type in the content you want to get answered"
                     autoSize={{ minRows: 10, maxRows: 10 }}
                     onChange={(e) =>
                       this.setState({
@@ -96,8 +83,9 @@ export default class Home extends Component {
                   className="textAreaContainer"
                 >
                   <TextArea
+                    defaultValue={question}
                     className="textArea"
-                    placeholder="ask your questions"
+                    placeholder="Ask question related to the content"
                     autoSize={{ minRows: 5, maxRows: 5 }}
                     onChange={(e) =>
                       this.setState({
@@ -109,9 +97,15 @@ export default class Home extends Component {
               </Col>
               <Col style={{ width: "90%", paddingTop: 20 }}>
                 {/* <button className="submitBtn">Analysis</button> */}
-                <button className="button" onClick={this.startAnimation}>
-                  Ask
-                </button>
+                {paragraph && question && (
+                  <button
+                    style={{ width: "17%" }}
+                    className="customButton"
+                    onClick={this.startAnimation}
+                  >
+                    Ask
+                  </button>
+                )}
               </Col>
             </Col>
             <Col className="right">
@@ -138,16 +132,16 @@ export default class Home extends Component {
               >
                 Pause
               </button> */}
-              <Row>
-                <Col xl={24} style={{ padding: 15 }}>
-                  <Col xl={24}>
-                    <span className="answerTitle">Answer</span>
+              {answer && (
+                <Row>
+                  <Col xl={24} style={{ padding: 15 }}>
+                    <Col xl={24}>
+                      <span className="answerTitle">Answer</span>
+                    </Col>
+                    <Col xl={24}>{<p className="answer">{answer}</p>}</Col>
                   </Col>
-                  <Col xl={24}>
-                    {answer && <p className="answer">{answer}</p>}
-                  </Col>
-                </Col>
-              </Row>
+                </Row>
+              )}
             </Col>
           </Row>
         </Col>

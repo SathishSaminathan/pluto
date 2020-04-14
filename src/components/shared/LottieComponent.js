@@ -18,6 +18,9 @@ const getAnimationType = (type) => {
     case Lotties.RobotHand:
       lottie = LottieFile.RobotHand;
       break;
+    case Lotties.FAQ:
+      lottie = LottieFile.FAQ;
+      break;
     case Lotties.RECORD_NOT_FOUND:
       lottie = LottieFile.RecordNotFound;
       break;

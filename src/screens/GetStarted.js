@@ -5,6 +5,7 @@ import LottieComponent from "components/shared/LottieComponent";
 import LottieFile from "assets/lottie";
 import "../style.scss";
 import { Images } from "assets/images";
+import { Lotties } from "constants/Appconstants";
 
 const GetStarted = (props) => {
   console.log("props", props);
@@ -22,8 +23,8 @@ const GetStarted = (props) => {
                 style={{
                   padding: 15,
                   display: "flex",
-                  justifyContent: "space-between",
-                  flexDirection:'column'
+                  // justifyContent: "space-between",
+                  flexDirection: "column",
                 }}
               >
                 <Col>
@@ -31,28 +32,28 @@ const GetStarted = (props) => {
                     <img src={Images.logo} />
                   </Col>
                   <Col xl={24}>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book. It has survived not only five
-                      centuries, but also the leap into electronic typesetting,
-                      remaining essentially unchanged. It was popularised in the
-                      1960s with the release of Letraset sheets containing Lorem
-                      Ipsum passages, and more recently with desktop publishing
-                      software like Aldus PageMaker including versions of Lorem
-                      Ipsum.
-                    </p>
+                    <LottieComponent type={Lotties.FAQ} width={"50%"} />
                   </Col>
                 </Col>
                 <Col>
-                  <button
-                    className="button"
-                    onClick={() => props.history.push("/home")}
-                  >
-                    Get Started
-                  </button>
+                  <Col xl={24} style={{ paddingTop: 10 }}>
+                    <p style={{ fontSize: 20, fontStyle: "italic" }}>
+                      Like an astronaut traveling through space, our info-naut
+                      "PLUTO" travels and explores your content, learns about
+                      them using the state of the art "Scalable Artificial
+                      Intelligence" algorithms; in-order to act as your
+                      "associate" to answer questions about the content using
+                      plain and simple natural language.
+                    </p>
+                  </Col>
+                  <Col>
+                    <button
+                      className="customButton"
+                      onClick={() => props.history.push("/home")}
+                    >
+                      Get Started
+                    </button>
+                  </Col>
                 </Col>
               </Col>
             </Row>
