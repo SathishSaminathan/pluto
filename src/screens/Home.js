@@ -116,6 +116,7 @@ export default class Home extends Component {
                 isStopped={this.state.isStopped}
                 isPaused={this.state.isPaused}
               />
+              <span>Pluto-Bot</span>
               {/* <button onClick={() => this.setState({ isStopped: true })}>
                 Stop
               </button>
