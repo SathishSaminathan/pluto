@@ -49,7 +49,7 @@ export default class Home extends Component {
   notify = () => {
     toast.configure();
 
-    toast.error("Error Notification !", {
+    toast.error("Oops! Something went wrong", {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
@@ -61,27 +61,31 @@ export default class Home extends Component {
   };
 
   askQuestion = () => {
+    this.startAnimation();
     Axios.get(
       `http://122.165.203.72:9094/search-engine/api/v1/search/predict?context=${this.state.paragraph}&question=${this.state.question}`
     )
       .then((res) => {
         console.log(res);
         this.setState({
-          answer: res.data.answer,
+          answer:
+            res.data.answer === ""
+              ? "Oops! We dint find your answer, may be you can rephrase your question or check the content"
+              : res.data.answer,
         });
         this.stopAnimation();
-        this.notify();
       })
       .catch((err) => {
         console.log(err);
         this.stopAnimation();
+        // this.notify();
       });
   };
 
   startAnimation = () => {
     this.setState({ isStopped: false, isPaused: false, answer: null });
     // this.constructText(this.state.paragraph);
-    this.askQuestion();
+    // this.askQuestion();
   };
   render() {
     const { answer, question, paragraph, isModalVisible } = this.state;
@@ -153,7 +157,7 @@ export default class Home extends Component {
                   <button
                     style={{ width: "17%" }}
                     className="customButton"
-                    onClick={this.notify}
+                    onClick={this.askQuestion}
                   >
                     Ask
                   </button>
