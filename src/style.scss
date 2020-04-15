@@ -219,9 +219,24 @@ button:hover::after {
   cursor: pointer;
 }
 
-.logoImage{
+.logoImage {
   position: absolute;
-  top: 20PX;
+  top: 20px;
   left: 0;
   width: 150px !important;
+}
+
+.tipsContainer {
+  list-style: none;
+  width: 90%;
+  padding: 0;
+  color: white;
+  padding: 10px;
+  background: white;
+  border-radius: 5px;
+  color: black;
+  font-size: 10px;
+  li {
+    text-align: left;
+  }
 }

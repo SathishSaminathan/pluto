@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { Row, Col } from "antd";
+import { toast } from "react-toastify";
+import Axios from "axios";
+import Rodal from "rodal";
+
 import TextArea from "antd/lib/input/TextArea";
 import LottieComponent from "components/shared/LottieComponent";
 import LottieFile from "assets/lottie";
 import { Images } from "assets/images";
-import Axios from "axios";
 
 export default class Home extends Component {
   constructor(props) {
@@ -15,7 +18,20 @@ export default class Home extends Component {
       answer: null,
       paragraph: null,
       question: null,
+      isModalVisible: false,
     };
+  }
+
+  componentDidMount() {
+    this.stopAnimation();
+    setTimeout(() => {
+      this.setState({
+        isModalVisible: true,
+      });
+      setTimeout(() => {
+        this.setState({ isModalVisible: false });
+      }, 2000);
+    }, 1000);
   }
 
   stopAnimation = () => {
@@ -24,8 +40,27 @@ export default class Home extends Component {
     });
   };
 
-  startAnimation = () => {
-    this.setState({ isStopped: false, isPaused: false, answer: null });
+  toggleModal = () => {
+    this.setState({
+      isModalVisible: !this.state.isModalVisible,
+    });
+  };
+
+  notify = () => {
+    toast.configure();
+
+    toast.error("Error Notification !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
+  constructText = (text) => {
+    this.setState({
+      paragraph: text.replace(/\[(.*?)\]/g, "").replace(/\r?\n|\r/g, ""),
+    });
+  };
+
+  askQuestion = () => {
     Axios.get(
       `http://122.165.203.72:9094/search-engine/api/v1/search/predict?context=${this.state.paragraph}&question=${this.state.question}`
     )
@@ -35,20 +70,35 @@ export default class Home extends Component {
           answer: res.data.answer,
         });
         this.stopAnimation();
+        this.notify();
       })
       .catch((err) => {
         console.log(err);
         this.stopAnimation();
       });
   };
-  componentDidMount() {
-    this.stopAnimation();
-  }
+
+  startAnimation = () => {
+    this.setState({ isStopped: false, isPaused: false, answer: null });
+    // this.constructText(this.state.paragraph);
+    this.askQuestion();
+  };
   render() {
-    const { answer, question, paragraph } = this.state;
+    const { answer, question, paragraph, isModalVisible } = this.state;
     return (
       <Row className="home">
         <Col style={{ width: "98%" }}>
+          {/* <Rodal
+            visible={isModalVisible}
+            onClose={this.toggleModal}
+            animation="rotate"
+          >
+            <p>
+              Make sure your question Doesn't have {} or [ ] 
+              Keep your question short and to the point 
+              Make sure there is no new line in the content
+            </p>
+          </Rodal> */}
           <Row className="homeContainer">
             <Col className="left">
               {/* <Col className="cont"> */}
@@ -58,6 +108,11 @@ export default class Home extends Component {
                 className="logoImage"
               />
               {/* </Col> */}
+              <ul className="tipsContainer">
+                <li>Make sure your question Doesn't have {} or [ ] </li>
+                <li>Keep your question short and to the point </li>
+                <li>Make sure there is no new line in the content</li>
+              </ul>
               <Col className="cont">
                 <Col className="title">Content</Col>
                 <Col
@@ -65,15 +120,11 @@ export default class Home extends Component {
                   className="textAreaContainer"
                 >
                   <TextArea
-                    defaultValue={paragraph}
+                    value={paragraph}
                     className="textArea"
                     placeholder="Type in the content you want to get answered"
                     autoSize={{ minRows: 8, maxRows: 8 }}
-                    onChange={(e) =>
-                      this.setState({
-                        paragraph: e.target.value,
-                      })
-                    }
+                    onChange={(e) => this.constructText(e.target.value)}
                   />
                 </Col>
               </Col>
@@ -102,7 +153,7 @@ export default class Home extends Component {
                   <button
                     style={{ width: "17%" }}
                     className="customButton"
-                    onClick={this.startAnimation}
+                    onClick={this.notify}
                   >
                     Ask
                   </button>
@@ -116,7 +167,7 @@ export default class Home extends Component {
                 isStopped={this.state.isStopped}
                 isPaused={this.state.isPaused}
               />
-              <span>Pluto-Bot</span>
+              <span style={{ fontWeight: "bold" }}>Pluto-Bot</span>
               {/* <button onClick={() => this.setState({ isStopped: true })}>
                 Stop
               </button>

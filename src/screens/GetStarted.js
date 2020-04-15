@@ -23,7 +23,7 @@ const GetStarted = (props) => {
                 style={{
                   padding: 15,
                   display: "flex",
-                  // justifyContent: "space-between",
+                  justifyContent: "space-around",
                   flexDirection: "column",
                 }}
               >
@@ -32,7 +32,7 @@ const GetStarted = (props) => {
                     <img src={Images.logo} />
                   </Col>
                   <Col xl={24}>
-                    <LottieComponent type={Lotties.FAQ} width={"50%"} />
+                    <LottieComponent type={Lotties.FAQ} width={"30%"} />
                   </Col>
                 </Col>
                 <Col>
