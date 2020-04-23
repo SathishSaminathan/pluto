@@ -230,13 +230,47 @@ button:hover::after {
   list-style: none;
   width: 90%;
   padding: 0;
-  color: white;
+  color: lightgrey;
   padding: 10px;
-  background: white;
   border-radius: 5px;
-  color: black;
-  font-size: 10px;
+  font-size: 0.8rem;
+  .heading {
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 10px 0;
+    // color: lightgrey;
+  }
   li {
     text-align: left;
+    &::after {
+      content: ".";
+    }
+  }
+}
+
+.iframeContainer {
+  --height: "50vh";
+  height: var(--height);
+  width: 50%;
+  // background-color: red;
+  position: absolute;
+  transition: height 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  right: 10px;
+  bottom: 10px;
+  box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 10px;
+  overflow: hidden;
+  // &:hover {
+  //   // height: 80vh;
+  // }
+  .header {
+    height: 60px;
+    background-color: $primaryThemeColor;
+    cursor: pointer;
+  }
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
   }
 }

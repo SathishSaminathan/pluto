@@ -8,6 +8,7 @@ import TextArea from "antd/lib/input/TextArea";
 import LottieComponent from "components/shared/LottieComponent";
 import LottieFile from "assets/lottie";
 import { Images } from "assets/images";
+import BotComponent from "components/shared/Bot";
 
 export default class Home extends Component {
   constructor(props) {
@@ -112,7 +113,11 @@ export default class Home extends Component {
                 className="logoImage"
               />
               {/* </Col> */}
+
               <ul className="tipsContainer">
+                <li className="heading">
+                  Tips on getting good answers quickly
+                </li>
                 <li>Make sure your question Doesn't have {} or [ ] </li>
                 <li>Keep your question short and to the point </li>
                 <li>Make sure there is no new line in the content</li>
@@ -202,6 +207,7 @@ export default class Home extends Component {
             </Col>
           </Row>
         </Col>
+        <BotComponent />
       </Row>
     );
   }
