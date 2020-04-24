@@ -207,7 +207,7 @@ export default class Home extends Component {
             </Col>
           </Row>
         </Col>
-        <BotComponent />
+        {/* <BotComponent /> */}
       </Row>
     );
   }

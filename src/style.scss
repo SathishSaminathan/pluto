@@ -274,3 +274,11 @@ button:hover::after {
     border: none;
   }
 }
+
+.chatContainer {
+  .input,
+  .output {
+    width: 50%;
+    height: 100vh;
+  }
+}
