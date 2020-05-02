@@ -4,6 +4,9 @@ $border_radius: 20px;
 $button_width: 150;
 $button_height: 40;
 
+$themeBlack: #191919;
+$cBorderRadius: 5px;
+
 .getStartedContainer {
   background-color: white;
   height: 100vh;
@@ -280,5 +283,184 @@ button:hover::after {
   .output {
     width: 50%;
     height: 100vh;
+  }
+}
+
+.coworkcontainer {
+  background-color: #f6f7fc;
+  // height: 100vh;
+  width: 100%;
+  .header {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .logo {
+      background: $themeBlack;
+      img {
+        height: 100%;
+        width: 200px;
+        object-fit: contain;
+      }
+    }
+    .selectionarea {
+      padding-right: 10px;
+      .profileName {
+        width: 30px;
+        height: 30px;
+        background: $themeBlack;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+  .body {
+    // background-color: red;
+    // height: 100%;
+    padding: 20px;
+    .welcomeArea {
+      display: flex;
+      border-bottom: 1px solid #d2d2d2;
+      padding-bottom: 20px;
+      .welcome {
+        background-color: white;
+        width: 30%;
+        display: flex;
+        border-radius: 10px;
+        border: solid rgba(255, 255, 255, 0.3) 10px; /*transparent border*/
+        .content {
+          width: 70%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          .name {
+            font-weight: bold;
+            font-size: 1.5rem;
+          }
+          .update {
+            font-weight: bold;
+            font-size: 0.5rem;
+          }
+        }
+        .image {
+          img {
+            width: 150px;
+            // height: 100px;
+            object-fit: contain;
+          }
+        }
+      }
+      .configArea {
+        padding: 10px;
+        width: 70%;
+        display: flex;
+        justify-content: space-between;
+        .name {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          .t {
+            font-weight: bold;
+            font-size: 1.8rem;
+          }
+        }
+        .datepic {
+        }
+      }
+    }
+    .addsubmit {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border-bottom: 1px solid #d2d2d2;
+      padding-bottom: 20px;
+      .ddARea {
+        padding-top: 10px;
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        div {
+          // width: 25%;
+        }
+      }
+    }
+    .dashboardcard {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #d2d2d2;
+      padding-bottom: 20px;
+      .cardstyle {
+        margin: 1%;
+        width: 23%;
+        height: 200px;
+        background-color: white;
+        border-radius: $cBorderRadius;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .valuearea {
+          display: flex;
+          align-items: center;
+          // justify-content: space-evenly;
+          .value {
+            // font-weight: bold;
+            font-size: 1rem;
+            padding-left: 10px;
+          }
+        }
+        .name {
+          font-weight: bold;
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+.custbut,
+.inverted {
+  outline: none;
+  cursor: pointer;
+  background: white;
+  border: none;
+  padding: 10px 15px;
+  margin-right: 10px;
+  border-radius: $cBorderRadius;
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  // &:hover {
+  //   background: $themeBlack;
+  //   color: white;
+  // }
+}
+.inverted {
+  background: $themeBlack;
+  color: white;
+  // &:hover {
+  //   background: white;
+  //   color: $themeBlack;
+  // }
+}
+
+.customselect {
+  margin-right: 10px;
+  .ant-select-selector {
+    width: 150px;
+    // border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: white !important;
+    border-radius: 5px !important;
+    border-color: white !important;
+    border: solid rgba(255, 255, 255, 0.3) 10px; /*transparent border*/
+    color: $themeBlack;
   }
 }
